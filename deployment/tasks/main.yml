@@ -1,0 +1,29 @@
+---
+# tasks file for deployment
+- name: Install Apache
+  import_tasks: apache.yml
+- name: Install GIT
+  import_tasks: git.yml
+- name: Install PHP and PHP Extensions
+  import_tasks: php.yml
+- name: Install Composer
+  import_tasks: composer.yml
+- name: Install MySQL
+  import_tasks: mysql.yml
+- name: Clone Repo and Install Laravel Dependencies
+  import_tasks: create-project.yml
+- name: Apache Site Configurations
+  import_tasks: apache-site.yml
+- name: Install Security Certificates
+  import_tasks: security-certificates.yml
+- name: Configure Database
+  import_tasks: database.yml
+- name: Edit Environment Variables
+  import_tasks: project-env.yml
+- name: Seed Database
+  import_tasks: seed.yml
+- name: Optimize App
+  import_tasks: optimize.yml
+- name: Execute Bash Script
+  import_tasks: script.yml
+

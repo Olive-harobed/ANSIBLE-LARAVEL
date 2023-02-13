@@ -1,0 +1,31 @@
+---
+- name: Edit DB_CONNECTION
+  replace:
+    path: "{{project_env}}"
+    regexp: "(DB_CONNECTION=+).+"
+    replace: "DB_CONNECTION=mysql"
+- name: Edit DB_HOST
+  replace:
+    path: "{{project_env}}"
+    regexp: "(DB_HOST=+).+"
+    replace: "DB_HOST=127.0.0.1"
+- name: Edit DB_PORT
+  replace:
+    path: "{{project_env}}"
+    regexp: "(DB_PORT=+).+"
+    replace: "DB_PORT=3306"
+- name: Edit DB_DATABASE
+  replace:
+    path: "{{project_env}}"
+    regexp: "(DB_DATABASE=+).+"
+    replace: "DB_DATABASE={{database_name}}"
+- name: Edit DB_USERNAME
+  replace:
+    path: "{{project_env}}"
+    regexp: "(DB_USERNAME=+).+"
+    replace: "DB_USERNAME={{mysql_user}}"
+- name: Edit DB_PASSWORD
+  replace:
+    path: "{{project_env}}"
+    regexp: "(DB_PASSWORD=+).+"
+    replace: "DB_PASSWORD={{mysql_password}}"

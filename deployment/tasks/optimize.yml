@@ -1,0 +1,28 @@
+---
+- name: Optimize Autoloader
+  command: composer install --optimize-autoloader
+  args:
+    chdir: "{{remote_project_dir}}"
+  become: false
+
+- name: App Optimization
+  command: "{{ item }}"
+  with_items:
+    - php artisan config:cache
+    - php artisan route:cache
+    - php artisan view:cache
+    - php artisan optimize
+  args:
+    chdir: "{{webroot_project}}"
+
+- name: Edit APP_ENV
+  replace:
+    path: "{{project_env}}"
+    regexp: "(APP_ENV=+).+"
+    replace: "APP_ENV=production"
+
+- name: Edit APP_DEBUG
+  replace:
+    path: "{{project_env}}"
+    regexp: "(APP_DEBUG=+).+"
+    replace: "APP_DEBUG=false"

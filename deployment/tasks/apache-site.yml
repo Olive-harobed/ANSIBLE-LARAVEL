@@ -1,0 +1,30 @@
+---
+- name: Populate service facts
+  service_facts:
+
+- name: Move to sites-available
+  template:
+    src: apache.conf.j2
+    dest: /etc/apache2/sites-available/apache.conf
+
+- name: Disable default site
+  command: a2dissite 000-default.conf
+  when: ansible_facts.services['apache2.service'].status == 'enabled'
+  notify:
+    - reload apache
+
+- name: Enable rewrite
+  apache2_module:
+    state: present
+    name: rewrite
+    ignore_configcheck: true
+    identifier: rewrite_module
+  when: ansible_facts.services['apache2.service'].status == 'enabled'
+  notify:
+    - reload apache
+
+- name: Enable apache.conf
+  command: a2ensite apache.conf
+  when: ansible_facts.services['apache2.service'].status == 'enabled'
+  notify:
+    - reload apache

@@ -1,0 +1,17 @@
+---
+# handlers file for deployment
+
+- name: reload apache
+  service:
+    name: apache2
+    state: reloaded
+
+- name: restart apache
+  service:
+    name: apache2
+    state: restarted
+
+- name: restart mysql
+  service:
+    name: mysql
+    state: restarted

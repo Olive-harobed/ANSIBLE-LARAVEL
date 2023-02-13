@@ -1,0 +1,10 @@
+---
+- name: Update Repo and Install MySQL Server
+  package:
+    update_cache: yes
+    state: present
+    name: default-mysql-server
+
+- name: Install Python MysQL
+  package:
+    name: python3-mysqldb

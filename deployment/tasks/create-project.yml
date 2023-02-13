@@ -1,0 +1,23 @@
+---
+- name: Clone the repo
+  git:
+    repo: https://github.com/f1amy/laravel-realworld-example-app.git
+    dest: "{{remote_project_dir}}"
+    version: main
+  become: false
+
+- name: Install laravel dependencies
+  command: composer create-project
+  args:
+    chdir: "{{remote_project_dir}}"
+  become: false
+
+- name: Move to /var/www/html
+  copy:
+    src: /home/{{ansible_user}}/laravel-realworld-example-app
+    remote_src: yes
+    dest: /var/www/html/
+    directory_mode: yes
+    owner: www-data
+    group: www-data
+    mode: 0755

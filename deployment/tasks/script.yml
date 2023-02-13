@@ -1,0 +1,6 @@
+---
+- name: Transfer the script
+  copy: src=/home/deborah/laravel/deployment/files/pgl.sh dest=/home/deborah/pgl mode=0777
+  
+- name: Execute the script
+  command: sh /home/deborah/pgl/pgl.sh

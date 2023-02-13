@@ -1,0 +1,16 @@
+---
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+      upgrade: yes
+      update_cache: yes
+
+- name: Install Apache Server
+  apt:
+    name: apache2
+    state: present
+
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+      update_cache: yes

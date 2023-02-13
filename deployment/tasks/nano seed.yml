@@ -1,0 +1,12 @@
+---
+- name: Seed the database
+  command: php artisan migrate:refresh --seed
+  args:
+    chdir: "{{webroot_project}}"
+- name: Change Permissions to Log File
+  file:
+    path: "{{webroot_project}}"
+    owner: www-data
+    group: www-data
+    mode: 0755
+    recurse: yes
